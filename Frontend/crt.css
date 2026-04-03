@@ -44,24 +44,28 @@ body {
   right: 0;
   pointer-events: none;
   background:
-    radial-gradient(ellipse at left center, rgba(0,0,0,0.5) 0%, transparent 30%),
-    radial-gradient(ellipse at right center, rgba(0,0,0,0.5) 0%, transparent 30%);
-  background-repeat: no-repeat;
-  background-size: 50% 100%;
-  background-position: left center, right center;
+    linear-gradient(to right, rgba(0,0,0,0.4) 0%, transparent 10%),
+    linear-gradient(to left, rgba(0,0,0,0.4) 0%, transparent 10%);
+  z-index: 2;
+}
+
+.crt-content {
+  position: relative;
+  z-index: 3;  
+  padding: 20px 40px;
 }
 
 .crt::after {
   content: "";
-  position: fixed;
+  position: absolute;
   inset: 0;
   pointer-events: none;
-
   background: radial-gradient(
     ellipse at center,
-    rgba(0, 255, 136, 0.08) 0%,
-    rgba(0, 0, 0, 0.95) 100%
+    rgba(0, 255, 136, 0.05) 0%,
+    rgba(0, 0, 0, 0.15) 100%
   );
+  z-index: 1;
 }
 
 @keyframes flicker {
