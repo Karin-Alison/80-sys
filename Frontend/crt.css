@@ -1,62 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
 body {
-  background: black;
+  margin: 0;
+  padding: 20px;
+  font-family: 'VT323', monospace;
+  font-size: 24px;
   color: #00ff88;
-  font-family: monospace;
+  overflow: hidden;
+
+  /* CRT horizontal lines */
+  background: repeating-linear-gradient(
+    to bottom,
+    #000 0px,
+    #000 2px,
+    #003322 3px,
+    #000 4px
+  );
+
+  animation: bgScroll 8s linear infinite;
+}
+
+@keyframes bgScroll {
+  from { background-position: 0 0; }
+  to   { background-position: 0 100px; }
 }
 
 .crt {
   position: relative;
-  color: #00ff88;
+
   text-shadow:
     0 0 2px #00ff88,
-    0 0 5px #00ff88,
-    0 0 10px #00ff88;
+    0 0 6px #00ff88,
+    0 0 12px #00ff88,
+    0 0 20px rgba(0,255,136,0.8);
 
-  animation: flicker 0.08s infinite;
-}
-
-.crt::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-
-  background: repeating-linear-gradient(
-    to bottom,
-    rgba(0, 255, 136, 0.05) 0px,
-    rgba(0, 255, 136, 0.05) 1px,
-    transparent 1px,
-    transparent 3px
-  );
-
-  pointer-events: none;
+  animation: flicker 0.12s infinite;
 }
 
 .crt::after {
   content: "";
-  position: absolute;
+  position: fixed;
   inset: 0;
+  pointer-events: none;
 
   background: radial-gradient(
     ellipse at center,
-    rgba(0, 255, 136, 0.1) 0%,
-    rgba(0, 0, 0, 0.9) 100%
+    rgba(0, 255, 136, 0.08) 0%,
+    rgba(0, 0, 0, 0.95) 100%
   );
-
-  pointer-events: none;
-}
-
-input {
-  color: #00ff88;
-  background: black;
-  border: 1px solid #00ff88;
-  outline: none;
 }
 
 @keyframes flicker {
-  0% { opacity: 0.92; }
-  50% { opacity: 1; }
-  100% { opacity: 0.88; }
+  0%   { opacity: 0.85; }
+  5%   { opacity: 0.95; }
+  10%  { opacity: 0.9; }
+  15%  { opacity: 1; }
+  20%  { opacity: 0.92; }
+  25%  { opacity: 1; }
+  30%  { opacity: 0.88; }
+  35%  { opacity: 0.97; }
+  40%  { opacity: 0.9; }
+  100% { opacity: 0.95; }
+}
+
+input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #00ff88;
+  font-family: inherit;
+  font-size: 24px;
+}
+
+.cursor {
+  display: inline-block;
+  width: 10px;
+  height: 1em;
+  background: #00ff88;
+  margin-left: 5px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
 }
