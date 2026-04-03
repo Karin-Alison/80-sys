@@ -5,20 +5,58 @@ body {
 }
 
 .crt {
-  text-shadow: 0 0 5px #00ff88;
-  animation: flicker 0.1s infinite;
-  background: linear-gradient(to top, #000000, #000000, #333333, #333333);
-  background-size: cover;
-  background-size: 100% 1px;
+  position: relative;
+  color: #00ff88;
+  text-shadow:
+    0 0 2px #00ff88,
+    0 0 5px #00ff88,
+    0 0 10px #00ff88;
 
+  animation: flicker 0.08s infinite;
 }
 
-input{
-  color:#00ff88
+.crt::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 255, 136, 0.05) 0px,
+    rgba(0, 255, 136, 0.05) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+
+  pointer-events: none;
+}
+
+.crt::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 255, 136, 0.1) 0%,
+    rgba(0, 0, 0, 0.9) 100%
+  );
+
+  pointer-events: none;
+}
+
+input {
+  color: #00ff88;
+  background: black;
+  border: 1px solid #00ff88;
+  outline: none;
 }
 
 @keyframes flicker {
-  0% { opacity: 0.95; }
+  0% { opacity: 0.92; }
   50% { opacity: 1; }
-  100% { opacity: 0.9; }
+  100% { opacity: 0.88; }
 }
