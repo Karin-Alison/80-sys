@@ -9,6 +9,9 @@ body {
   animation: flicker 0.1s infinite;
 }
 
+#input{
+  background-color: black;
+}
 @keyframes flicker {
   0% { opacity: 0.95; }
   50% { opacity: 1; }
