@@ -1,19 +1,35 @@
 var output = document.getElementById("output");
 var input = document.getElementById("input");
 
-input.addEventListener("keyup", ev => {
-    if(ev.key === "Enter"){
-        output.innerHTML += "<br>" + input.value;
-        if(input.value == "frog"){
-            output.innerHTML +=  "<br>|||FROGGGG SECRET|||"
-        }
-        else if(input.value == "clear"){
-            output.innerHTML = ""
-        }
-        else{
-            output.innerHTML += '<br> Command "' + input.value + '" not found' 
-        }
-        input.value = ""
+const commands = {
+    "hello": () => "Heyy",
+    "time": () => "Current Time: " + new Date().toLocaleTimeString(),
+    "clear": () => {
+        output.innerHTML = ""
+        return ""
+    },
+    "frog": () => "|||FROGGGG SECRET|||"
+}
 
+document.addEventListener('click', () => input.focus());
+document.addEventListener('keydown', () => input.focus());
+window.onload = () => input.focus();
+
+
+input.addEventListener("keyup", ev => {
+    const cmd = input.value.trim().toLowerCase();
+    if(ev.key === "Enter"){
+        output.innerHTML += `<div> ${cmd}</div>`;
+
+        if(commands[cmd]){
+            var result = commands[cmd]();
+            if(result){
+                output.innerHTML += `<div>${result}</div>`;
+            }
+        }else{
+                output.innerHTML += `<div>Command "${cmd}" not found</div>`
+        }
+        input.value = "";
     }
+
 })
