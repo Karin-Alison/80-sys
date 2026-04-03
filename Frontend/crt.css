@@ -7,11 +7,16 @@ body {
 .crt {
   text-shadow: 0 0 5px #00ff88;
   animation: flicker 0.1s infinite;
+  background: linear-gradient(to top, #000000, #000000, #333333, #333333);
+  background-size: cover;
+  background-size: 100% 1px;
+
 }
 
-#input{
-  background-color: black;
+input{
+  color:#00ff88
 }
+
 @keyframes flicker {
   0% { opacity: 0.95; }
   50% { opacity: 1; }
