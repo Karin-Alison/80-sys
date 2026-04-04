@@ -1,7 +1,6 @@
 import { output, input, choosing, Print, home, sleep } from "./Scripts/Stuff.js";
 import { commands } from "./Scripts/commands.js";
 
-
 //thingy for autofocus on input so that you dont have to click on it to type
 document.addEventListener('click', () => {
     if(!choosing){ input.focus();}
@@ -25,7 +24,6 @@ window.onload = () => {
 })
 };
 
-
 //command handler thingy
 input.addEventListener("keyup", async (ev) => {
 
@@ -44,8 +42,5 @@ input.addEventListener("keyup", async (ev) => {
         }
     }
 })
-
-
-
 
 
