@@ -16,34 +16,50 @@ export async function startSnakeGenocide(){
     return "";
 }
 
+function getRandomInt(min, max){
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 function LonelySnake(){
     //singleplayer game function
+    let apple = [getRandomInt(1, 21), getRandomInt(1, 16)];
     let changed = false;
     Print("Drawing Game");
     let Zmiq = [[3,4],[3,3],[3,2]];
     let Snake_length = 3;
     let direction = [0,-1];
     document.addEventListener("keydown", (e) => {
-        if(e.key === "ArrowUp" && direction[2] != 2 && !changed) {direction = [0,-1, 1]; changed = true;}
-        if(e.key === "ArrowDown" && direction[2] != 1 && !changed) {direction = [0,1, 2];changed = true;}
-        if(e.key === "ArrowLeft" && direction[2] != 4 && !changed) {direction = [-1,0, 3];changed = true;}
+        if(e.key === "ArrowUp" && direction[2] != 2 && !changed) {direction = [0, -1, 1]; changed = true;}
+        if(e.key === "ArrowDown" && direction[2] != 1 && !changed) {direction = [0, 1, 2];changed = true;}
+        if(e.key === "ArrowLeft" && direction[2] != 4 && !changed) {direction = [-1, 0, 3];changed = true;}
         if(e.key === "ArrowRight" && direction[2] != 3 && !changed) {direction = [1, 0, 4];changed = true;}
     });
 
+
+function isRunning(){
+    for(let i = 1; i < Zmiq.length; i++){
+        if(Zmiq[0][0] === Zmiq[i][0] && Zmiq[0][1] === Zmiq[i][1]){
+            return false;
+        }        
+    }
+    return true;
+}
+
 function update(){
+    if(isRunning){
+        let head = Zmiq[0];
 
-    let head = Zmiq[0];
+        let newHead = [
+            head[0] + direction[0],
+            head[1] + direction[1]
+        ];
 
-    let newHead = [
-        head[0] + direction[0],
-        head[1] + direction[1]
-    ];
+        newHead[0] = (newHead[0] + 21) % 21;
+        newHead[1] = (newHead[1] + 16) % 16;
 
-    newHead[0] = (newHead[0] + 21) % 21;
-    newHead[1] = (newHead[1] + 16) % 16;
-
-    Zmiq.unshift(newHead); 
-    Zmiq.pop();            
+        Zmiq.unshift(newHead); 
+        Zmiq.pop();    
+    }        
 }
 
     function gameDraw(){
@@ -83,20 +99,21 @@ function update(){
             field_x[hy][hx*2] = "█";
             field_x[hy][hx*2+1] = "█";
         }
+        field_x[apple[1]][apple[0]*2] = "@";
+        field_x[apple[1]][apple[0]*2+1] = "@";
         Print("", output, true);
         for(let i = 0; i < field_x.length; i++){
             Print(field_x[i].join('') + "<br>");
         }
+        
     }
 
-    function gameTick() {
-        update();  
-        gameDraw();    
-        changed = false;
-    }
     setInterval(gameTick, 200);
 
-
-    
-
+    function gameTick() {
+        
+        update();
+        gameDraw();
+        changed = false;
+    }
 }
