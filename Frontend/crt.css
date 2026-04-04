@@ -28,10 +28,10 @@ body {
   position: relative;
 
   text-shadow:
-    0 0 5px #00ff88,
-    0 0 15px #00ff88,
-    0 0 30px #00ff88,
-    0 0 50px rgba(0, 255, 136, 0.6);
+    0 0 2px #00ff88,
+    0 0 6px #00ff88,
+    0 0 12px #00ff88,
+    0 0 20px rgba(0,255,136,0.8);
 
   animation: flicker 0.12s infinite;
 }
@@ -107,16 +107,4 @@ input {
 @keyframes blink {
   0%, 50%, 100% { opacity: 1; }
   25%, 75% { opacity: 0; }
-}
-
-
-.menu-blink {
-  background:#00ff88;
-  color:#000000;
-  animation: flicker 0.12s infinite;
-  box-shadow:
-    0 0 5px #00ff88,
-    0 0 15px #00ff88,
-    0 0 30px #00ff88,
-    0 0 50px rgba(0, 255, 136, 0.6);
 }
