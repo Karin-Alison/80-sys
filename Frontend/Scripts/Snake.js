@@ -18,28 +18,34 @@ export async function startSnakeGenocide(){
 
 function LonelySnake(){
     //singleplayer game function
+    let changed = false;
     Print("Drawing Game");
     let Zmiq = [[3,4],[3,3],[3,2]];
     let Snake_length = 3;
     let direction = [0,-1];
     document.addEventListener("keydown", (e) => {
-        if(e.key === "ArrowUp") direction = [0,-1];
-        if(e.key === "ArrowDown") direction = [0,1];
-        if(e.key === "ArrowLeft") direction = [-1,0];
-        if(e.key === "ArrowRight") direction = [1, 0];
+        if(e.key === "ArrowUp" && direction[2] != 2 && !changed) {direction = [0,-1, 1]; changed = true;}
+        if(e.key === "ArrowDown" && direction[2] != 1 && !changed) {direction = [0,1, 2];changed = true;}
+        if(e.key === "ArrowLeft" && direction[2] != 4 && !changed) {direction = [-1,0, 3];changed = true;}
+        if(e.key === "ArrowRight" && direction[2] != 3 && !changed) {direction = [1, 0, 4];changed = true;}
     });
 
-    function update(){
-        for(let i = 1; i < Snake_length; i++){
-            Zmiq[i] = Zmiq[i-1];
-        }
-        Zmiq[0][0] += direction[0];
-        Zmiq[0][1] += direction[1];
+function update(){
 
-        Zmiq[0][0] = (Zmiq[0][0] + 20) % 21;
-        Zmiq[0][1] = (Zmiq[0][1] + 16) % 16;
+    let head = Zmiq[0];
 
-    }
+    let newHead = [
+        head[0] + direction[0],
+        head[1] + direction[1]
+    ];
+
+    newHead[0] = (newHead[0] + 21) % 21;
+    newHead[1] = (newHead[1] + 16) % 16;
+
+    Zmiq.unshift(newHead); 
+    Zmiq.pop();            
+}
+
     function gameDraw(){
         let field =['|# # # # # # ∙ ∙ ∙ ∙SNAKEGAME∙ ∙ ∙ ∙ # # # # # #|',
                     '#∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ #',
@@ -59,20 +65,26 @@ function LonelySnake(){
                     '#∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ #',
                     '#∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ #',
                     '# # # # # # # # # # # # # # # # # # # # # # # # # #']
+        
+        let field_x = field.map(row => row.split(''));
 
-        let field_x = field.map(row => row.split(''));;
-        for(let i = 0; i < Zmiq.length; i++){
+        for(let i = 1; i < Zmiq.length; i++){
             let x = Zmiq[i][0];
             let y = Zmiq[i][1];
 
-            if(i === 0){
-                field_x[y][x] = "░";
-            } else {
-                field_x[y][x] = "█";
-            }
+            field_x[y][x*2] = "░";
+            field_x[y][x*2+1] = "░";
+        }
+
+        let hx = Zmiq[0][0];
+        let hy = Zmiq[0][1];
+
+        if(field_x[hy] && field_x[hy][hx]){
+            field_x[hy][hx*2] = "█";
+            field_x[hy][hx*2+1] = "█";
         }
         Print("", output, true);
-        for(let i = 0; i<field_x.length; i++){
+        for(let i = 0; i < field_x.length; i++){
             Print(field_x[i].join('') + "<br>");
         }
     }
@@ -80,6 +92,7 @@ function LonelySnake(){
     function gameTick() {
         update();  
         gameDraw();    
+        changed = false;
     }
     setInterval(gameTick, 200);
 
