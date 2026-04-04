@@ -1,50 +1,38 @@
-const output = document.getElementById("output");
-const input = document.getElementById("input");
-var choosing = false;
-const commands = {
-    "hello": () => "Heyy",
-    "time": () => "Current Time: " + new Date().toLocaleTimeString(),
-    "clear": () => {
-        output.innerHTML = ""
-        return ""
-    },
-    "frog": () => "|||FROGGGG SECRET|||",
-    "snake": () => {
-        choosing = true;
-        output.innerHTML += "<div>-----------SNAKE GAME-----------</div>"
-        output.innerHTML += "<div>----------Single Player-----------</div>"
-        output.innerHTML += "<div>-----------Multiplayer-----------</div>"
-    }
-}
+import { output, input, choosing, Print } from "./Scripts/Stuff.js";
+import { commands } from "./Scripts/commands.js";
 
-document.addEventListener('click', () => input.focus());
-document.addEventListener('keydown', () => input.focus());
-window.onload = () => input.focus();
+//thingy for autofocus on input so that you dont have to click on it to type
+document.addEventListener('click', () => {
+    if(!choosing){ input.focus();}
+});
+document.addEventListener('keydown', () => {
+    if(!choosing){ input.focus();}
+});
+window.onload = () => {
+    if(!choosing){ input.focus();}
+};
 
 
-input.addEventListener("keyup", ev => {
-    if(choosing){
-        var choice = 0;
-        if(ev.key === "DownArrow"){
-            
-        }
-    }
-})
-
-
-function OutputWords(ev){
+//command handler thingy
+input.addEventListener("keyup", async (ev) => {
     const cmd = input.value.trim().toLowerCase();
     if(ev.key === "Enter"){
         output.innerHTML += `<div> ${cmd}</div>`;
 
         if(commands[cmd]){
-            const result = commands[cmd]();
+            const result = await commands[cmd]();
             if(result){
-                output.innerHTML += `<div>${result}</div>`;
+                Print(result);
             }
         }else{
-                output.innerHTML += `<div>Command "${cmd}" not found</div>`
+            Print(`Command ${cmd} not found.`);
         }
         input.value = "";
     }
-}
+})
+
+
+
+
+
+
