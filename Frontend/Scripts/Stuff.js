@@ -60,4 +60,46 @@ export function Print(message, display = output, rewrite = false){
     else{
         display.innerHTML = `<div>${message}</div>`
     }
+
+    window.scrollTo({
+        top:document.body.scrollHeight, 
+        behavior:'instant'
+    })
+}
+
+
+export const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+export async function PrintAsciiArt(art){
+    // let
+}
+
+export function home(){
+    let clock = new Date();
+    output.innerHTML = `<pre>   
+             úúúúúúúúú        úúúúúúúúúúú                                                                     
+           ôúúúúúúúúúúôú    ôô&úúúúúúúúúúôô                                                                   
+          úúúúúú   úúúúú    úúúúú     üúúúú                                                                   
+          úúúúúú   úúúúú    úúúúú   úúúúúúú                                                                   
+          úúúúúú   úúúúú    úúúúú   úúúúúúú                                                                   
+             úúúúúúúúú      úúúúú úúúúúúúúú                                                                   
+          úúúúúú   úúúúú    úúúúúúúúú üúúúú        úúúúúúúúúúúú   úúúúú    úúúú&     üúúúúúúúúúúú             
+          úúúúúú   úúúúú    úúúúúúúúú üúúúú        úúúúúúúúúúúú   úúúúú    úúúú&     üúúúúúúúúúúú             
+          úúúúúú   úúúúú    úúúúúúú   üúúúúúúúúúúúúúúú            úúúúú    úúúú&   &úúúúü                     
+          üúúúúúúúúúúúú&    úúúúúúúúúúúúúú&&&&&&&úúúúúúúúúúú      úúúúú    úúúú&   ú&úúúúúúúúú&               
+             úúúúúúúúú        úúúúúúúúúúú          úúúúúúúúú      úúúúú    úúúú&     üúúúúúúúúú               
+                                                         úúúúúú     úúúúúúúúúúú&            &úúúú             
+                                                 úúúúúúúúúúúúúõ     úúúúúúúúúúú&   úúúúúúúúúúúúúú             
+                                                 úúúúúúúúúúú               úúúú&   &úúúúúúúúúúú               
+                                                                  úúúúúúúúúúúú                                
+                                                                  úúúúúúúúúúúú                              </pre>`;
+    Print("80-sys    Version 1.87");
+    Print("[OK] Protocol 'IDDQD'");
+    Print("[OK] Protocol 'C-3P0+R2'");
+    Print("[OK] Date-Time: " + clock.toLocaleDateString() + "    " + clock.toLocaleTimeString());
+    Print("[OK] CPU [ Universal (AC) e2-077PP 5.2GHz ]");
+    Print("[OK] CPU USAGE: " + (10 + 2 * Math.random() + clock.getDate() / 100 + clock.getMilliseconds() / 1000).toFixed(2) + "%");
+    Print("[OK] MEMORY [ 193KB/640KB ]");
+
+
 }
