@@ -1,5 +1,6 @@
 import { output, input, choosing, Print, home, sleep, input_sign } from "./Scripts/Stuff.js";
 import { commands } from "./Scripts/commands.js";
+
 let enterPressed = false;
 
 //thingy for autofocus on input so that you dont have to click on it to type
@@ -24,7 +25,6 @@ window.onload = () => {
     behavior:'instant'
 })
 };
-
 
 //command handler thingy
 input.addEventListener("keyup", async (ev) => {
@@ -51,8 +51,5 @@ input.addEventListener("keyup", async (ev) => {
     }
     
 })
-
-
-
 
 
