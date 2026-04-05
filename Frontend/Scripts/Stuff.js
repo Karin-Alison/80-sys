@@ -2,7 +2,7 @@
 export const output = document.getElementById("output");
 export const input = document.getElementById("input");
 export const input_sign = document.getElementById("input_s");
-export var choosing = false;
+export let choosing = false;
 
 export async function Choose(options, display) {
     //for menus with multiple options, give it an array of options - whats gonna be listed on the screen
@@ -77,8 +77,25 @@ export const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 export async function PrintAsciiArt(art){
     // let
 }
+let homeInterval = null;
+let homeChill = false;
+function handleInput(){
+    homeChill = false;
+    homeInterval = null;
+    clearInterval(homeInterval);
+    document.removeEventListener("keydown", handleInput);
+    input.disabled = false;
+    input_sign.innerHTML = "user:~$";
+    input.focus();
+}
+
+
+document.addEventListener("keydown", handleInput);
 
 export function home(){
+    input.disabled = true;
+    input_sign.innerHTML = "";
+    homeChill = true;
     let clock = new Date();
     output.innerHTML = `<pre>   
              úúúúúúúúú        úúúúúúúúúúú                                                                     
@@ -97,13 +114,18 @@ export function home(){
                                                  úúúúúúúúúúú               úúúú&   &úúúúúúúúúúú               
                                                                   úúúúúúúúúúúú                                
                                                                   úúúúúúúúúúúú                              </pre>`;
-    Print("80-sys    Version 1.87");
-    Print("[OK] Protocol 'IDDQD'");
-    Print("[OK] Protocol 'C-3P0+R2'");
+    Print("80-sys    [Version 1.87231] ");
+    Print("(z) Y-K Duo-production. No rules here.");
     Print("[OK] Date-Time: " + clock.toLocaleDateString() + "    " + clock.toLocaleTimeString());
     Print("[OK] CPU [ Universal (AC) e2-077PP 5.2GHz ]");
     Print("[OK] CPU USAGE: " + (10 + 2 * Math.random() + clock.getDate() / 100 + clock.getMilliseconds() / 1000).toFixed(2) + "%");
     Print("[OK] MEMORY [ 193KB/640KB ]");
+    Print("[OK] Protocol 'IDDQD'");
+    Print("[OK] Protocol 'C-3P0+R2'");
 
-
+    if(homeChill){
+        if(!homeInterval){
+            homeInterval = setInterval(home, 1000);
+        }
+    }
 }
