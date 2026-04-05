@@ -1,6 +1,6 @@
-import { output, input, choosing, Print, home, sleep } from "./Scripts/Stuff.js";
+import { output, input, choosing, Print, home, sleep, input_sign } from "./Scripts/Stuff.js";
 import { commands } from "./Scripts/commands.js";
-
+let enterPressed = false;
 
 //thingy for autofocus on input so that you dont have to click on it to type
 document.addEventListener('click', () => {
@@ -30,10 +30,13 @@ window.onload = () => {
 input.addEventListener("keyup", async (ev) => {
 
     const cmd = input.value.trim().toLowerCase();
-    if(ev.key === "Enter"){
+    if(ev.key === "Enter" && !enterPressed){
+        enterPressed = true;
+        input_sign.innerHTML = "";
+        input.readOnly = true;
         input.value = "";
         output.innerHTML += `<div> ${cmd}</div>`;
-        await sleep(100 + Math.random()*100*Math.random() +Math.random()*400);
+        await sleep(100 + Math.random()*100 +Math.random()*400);
         if(commands[cmd]){
             const result = await commands[cmd]();
             if(result){
@@ -42,7 +45,11 @@ input.addEventListener("keyup", async (ev) => {
         }else{
             Print(`Command ${cmd} not found.`);
         }
+        enterPressed = false;
+        input.readOnly = false;
+        input_sign.innerHTML = "user:~$";
     }
+    
 })
 
 

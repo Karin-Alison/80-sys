@@ -1,6 +1,7 @@
 //just some stuff
 export const output = document.getElementById("output");
 export const input = document.getElementById("input");
+export const input_sign = document.getElementById("input_s");
 export var choosing = false;
 
 export async function Choose(options, display) {
@@ -48,6 +49,9 @@ export async function Choose(options, display) {
     });
 }
 
+export function getRandomInt(min, max){
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 export function Print(message, display = output, rewrite = false){
     //function to write instead of output.innerHTMK... and all that
