@@ -1,21 +1,39 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="crt.css">
-    </head>
-  <body class="crt">
-  <div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>80-sys Terminal</title>
+    <link rel="stylesheet" href="crt.css">
+</head>
+<body class="crt">
+    <div id="overlay-dim" style="display: none;"></div>
+
     <div class="crt-content">
-        <p>
-            <p id="output">
-                80-sys [Version 1.87231] <br>
-                (z) Y-K Duo-production. No rules here.
-            </p>
-            <br>
+        <div id="output">
+            80-sys [Version 1.87231] <br>
+            (z) Y-K Duo-production. No rules here.
+            <br><br>
+        </div>
+
+        <div class="input-line">
             <span id="input_s">user:~$</span>
-            <input class="crt" autocomplete="off" id="input">
-        </p>
+            <input class="crt" autocomplete="off" id="input" autofocus>
+        </div>
     </div>
-  </div>
-  <script type="module" src="CheckCommand.js"></script>
+
+    <div id="login-panel" style="display: none;">
+        <h2>SYSTEM ACCESS</h2>
+        <input type="text" id="auth-username" placeholder="Username" class="crt">
+        <input type="password" id="auth-password" placeholder="Password" class="crt">
+        
+        <div style="margin-top: 10px;">
+            <button onclick="executeLogin()">LOGIN</button>
+            <button onclick="executeRegister()">REGISTER</button>
+            <button onclick="closePanel()" class="cancel-btn">CANCEL</button>
+        </div>
+    </div>
+
+    <script type="module" src="CheckCommand.js"></script>
 </body>
 </html>

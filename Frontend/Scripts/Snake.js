@@ -196,6 +196,4 @@ function LonelySnake(){
         }
     }
     let intervalId = setInterval(gameTick, 200);
-
-
 }
