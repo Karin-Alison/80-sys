@@ -1,4 +1,4 @@
-import { output, input, choosing, Print, home, sleep, input_sign } from "./Scripts/Stuff.js";
+import { output, input, choosing, Print, home, sleep, input_sign,  } from "./Scripts/Stuff.js";
 import { commands } from "./Scripts/commands.js";
 
 let enterPressed = false;
@@ -28,7 +28,6 @@ window.onload = () => {
 
 //command handler thingy
 input.addEventListener("keyup", async (ev) => {
-
     const cmd = input.value.trim().toLowerCase();
     if(ev.key === "Enter" && !enterPressed){
         enterPressed = true;

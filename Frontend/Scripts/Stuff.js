@@ -3,7 +3,7 @@ export const output = document.getElementById("output");
 export const input = document.getElementById("input");
 export const input_sign = document.getElementById("input_s");
 export let choosing = false;
-
+export let inGame = false;
 export async function Choose(options, display) {
     //for menus with multiple options, give it an array of options - whats gonna be listed on the screen
     //and disaplay is, well, for the place where you wanna draw all that
@@ -93,39 +93,43 @@ function handleInput(){
 document.addEventListener("keydown", handleInput);
 
 export function home(){
-    input.disabled = true;
-    input_sign.innerHTML = "";
-    homeChill = true;
-    let clock = new Date();
-    output.innerHTML = `<pre>   
-             úúúúúúúúú        úúúúúúúúúúú                                                                     
-           ôúúúúúúúúúúôú    ôô&úúúúúúúúúúôô                                                                   
-          úúúúúú   úúúúú    úúúúú     üúúúú                                                                   
-          úúúúúú   úúúúú    úúúúú   úúúúúúú                                                                   
-          úúúúúú   úúúúú    úúúúú   úúúúúúú                                                                   
-             úúúúúúúúú      úúúúú úúúúúúúúú                                                                   
-          úúúúúú   úúúúú    úúúúúúúúú üúúúú        úúúúúúúúúúúú   úúúúú    úúúú&     üúúúúúúúúúúú             
-          úúúúúú   úúúúú    úúúúúúúúú üúúúú        úúúúúúúúúúúú   úúúúú    úúúú&     üúúúúúúúúúúú             
-          úúúúúú   úúúúú    úúúúúúú   üúúúúúúúúúúúúúúú            úúúúú    úúúú&   &úúúúü                     
-          üúúúúúúúúúúúú&    úúúúúúúúúúúúúú&&&&&&&úúúúúúúúúúú      úúúúú    úúúú&   ú&úúúúúúúúú&               
-             úúúúúúúúú        úúúúúúúúúúú          úúúúúúúúú      úúúúú    úúúú&     üúúúúúúúúú               
-                                                         úúúúúú     úúúúúúúúúúú&            &úúúú             
-                                                 úúúúúúúúúúúúúõ     úúúúúúúúúúú&   úúúúúúúúúúúúúú             
-                                                 úúúúúúúúúúú               úúúú&   &úúúúúúúúúúú               
-                                                                  úúúúúúúúúúúú                                
-                                                                  úúúúúúúúúúúú                              </pre>`;
-    Print("80-sys    [Version 1.87231] ");
-    Print("(z) Y-K Duo-production. No rules here.");
-    Print("[OK] Date-Time: " + clock.toLocaleDateString() + "    " + clock.toLocaleTimeString());
-    Print("[OK] CPU [ Universal (AC) e2-077PP 5.2GHz ]");
-    Print("[OK] CPU USAGE: " + (10 + 2 * Math.random() + clock.getDate() / 100 + clock.getMilliseconds() / 1000).toFixed(2) + "%");
-    Print("[OK] MEMORY [ 193KB/640KB ]");
-    Print("[OK] Protocol 'IDDQD'");
-    Print("[OK] Protocol 'C-3P0+R2'");
+    function update_graphics(){
+        input.disabled = true;
+        input_sign.innerHTML = "";
+        homeChill = true;
+        let clock = new Date();
+        output.innerHTML = `<pre>   
+                úúúúúúúúú        úúúúúúúúúúú                                                                     
+            ôúúúúúúúúúúôú    ôô&úúúúúúúúúúôô                                                                   
+            úúúúúú   úúúúú    úúúúú     üúúúú                                                                   
+            úúúúúú   úúúúú    úúúúú   úúúúúúú                                                                   
+            úúúúúú   úúúúú    úúúúú   úúúúúúú                                                                   
+                úúúúúúúúú      úúúúú úúúúúúúúú                                                                   
+            úúúúúú   úúúúú    úúúúúúúúú üúúúú        úúúúúúúúúúúú   úúúúú    úúúú&     üúúúúúúúúúúú             
+            úúúúúú   úúúúú    úúúúúúúúú üúúúú        úúúúúúúúúúúú   úúúúú    úúúú&     üúúúúúúúúúúú             
+            úúúúúú   úúúúú    úúúúúúú   üúúúúúúúúúúúúúúú            úúúúú    úúúú&   &úúúúü                     
+            üúúúúúúúúúúúú&    úúúúúúúúúúúúúú&&&&&&&úúúúúúúúúúú      úúúúú    úúúú&   ú&úúúúúúúúú&               
+                úúúúúúúúú        úúúúúúúúúúú          úúúúúúúúú      úúúúú    úúúú&     üúúúúúúúúú               
+                                                            úúúúúú     úúúúúúúúúúú&            &úúúú             
+                                                    úúúúúúúúúúúúúõ     úúúúúúúúúúú&   úúúúúúúúúúúúúú             
+                                                    úúúúúúúúúúú               úúúú&   &úúúúúúúúúúú               
+                                                                    úúúúúúúúúúúú                                
+                                                                    úúúúúúúúúúúú                              </pre>`;
+        Print("80-sys    [Version 1.87231] ");
+        Print("(z) Y-K Duo-production. No rules here.");
+        Print("[OK] Date-Time: " + clock.toLocaleDateString() + "    " + clock.toLocaleTimeString());
+        Print("[OK] CPU [ Universal (AC) e2-077PP 5.2GHz ]");
+        Print("[OK] CPU USAGE: " + (10 + 2 * Math.random() + clock.getDate() / 100 + clock.getMilliseconds() / 1000).toFixed(2) + "%");
+        Print("[OK] MEMORY [ 193KB/640KB ]");
+        Print("[OK] Protocol 'IDDQD'");
+        Print("[OK] Protocol 'C-3P0+R2'");
+    }
+    
+    update_graphics();
 
     if(homeChill){
         if(!homeInterval){
-            homeInterval = setInterval(home, 1000);
+            homeInterval = setInterval(update_graphics, 1000);
         }
     }
 }
