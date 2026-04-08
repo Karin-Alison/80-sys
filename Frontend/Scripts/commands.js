@@ -1,5 +1,6 @@
 import { startSnakeGenocide } from "./Snake.js";
 import { home } from "./Stuff.js";
+import { HangMan } from "./HangMan.js";
 
 export const commands = {
     "hello": () => "Heyy",
@@ -49,5 +50,7 @@ export const commands = {
     "logout": () => {
         sessionStorage.removeItem("currentUser");
         return "User logged out. Session terminated.";
-    }
+    },
+
+    "hangman": () => HangMan()
 };

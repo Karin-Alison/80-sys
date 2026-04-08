@@ -3,7 +3,7 @@ import { output, Choose, Print, getRandomInt, input, input_sign } from "./Stuff.
 export async function startSnakeGenocide(){
     output.innerHTML = "<div>-----------SNAKE GAME-----------</div>";
     const Options = ["Single Player", "Multiplayer"];
-    const choice = await Choose(Options, output);
+    const choice = await Choose(Options, output, "----------------Snake Game----------------");
 
     if(choice === 0){
         Print("Game Single starting...", output, true);

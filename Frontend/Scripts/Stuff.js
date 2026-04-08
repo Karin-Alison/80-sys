@@ -137,6 +137,15 @@ export const output = document.getElementById("output");
 export const input = document.getElementById("input");
 export const input_sign = document.getElementById("input_s");
 export let choosing = false;
+let enabled = true;
+
+export function setEnabled(value){
+    enabled = value;
+}
+
+export function getEnabled(){
+    return enabled;
+}
 
 /**
  * printf function
@@ -176,7 +185,7 @@ export async function Prompt(message) {
         window.addEventListener("keydown", handleEnter);
     });
 }
-export async function Choose(options, display) {
+export async function Choose(options, display, menu_name) {
     let curIndex = 0;
     choosing = true;
     input.disabled = true;
@@ -184,12 +193,12 @@ export async function Choose(options, display) {
 
     return new Promise((resolve) => {
         function render() {
-            display.innerHTML = "<div>----------- SYSTEM MENU -----------</div>";
+            display.innerHTML = `<div>${menu_name}</div>`;
             options.forEach((name, i) => {
                 if (i === curIndex) {
-                    display.innerHTML += `<div class="menu-blink"> > [${name}] < </div>`;
+                    display.innerHTML += `<span class="menu-blink"> > [${name}] < </span> <br>`;
                 } else {
-                    display.innerHTML += `<div class="menu-item">   ${name}   </div>`;
+                    display.innerHTML += `<span>   ${name}   </span> <br>`;
                 }
             });
         }
@@ -270,7 +279,7 @@ export function home() {
             Print("Terminal Ready.");
         };
 
-        
+
     drawUI();
     document.addEventListener("keydown", exitHome);
     homeInterval = setInterval(drawUI, 1000);
