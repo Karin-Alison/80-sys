@@ -1,4 +1,4 @@
-import { output, Print, Prompt, sleep } from "./Stuff.js";
+import {output, Print, Prompt, sleep} from "./Stuff.js";
 
 export async function startTicTacToe() {
     Print("--- INITIALIZING TIC-TAC-TOE PROTOCOL ---", output, true);

@@ -147,12 +147,6 @@ export function getEnabled(){
     return enabled;
 }
 
-/**
- * printf function
- * @param {string} message - text to display
- * @param {HTMLElement} display - output; default is outpuy
- * @param {boolean} rewrite - if it is true, clear the display 
- */
 export function Print(message, display = output, rewrite = false) {
     if (rewrite) {
         display.innerHTML = `<div>${message}</div>`;
@@ -167,6 +161,7 @@ export function Print(message, display = output, rewrite = false) {
 }
 
 export async function Prompt(message) {
+    window.choosing = true; // Global lock
     Print(message);
     const oldSign = input_sign.innerHTML;
     input.value = "";
@@ -175,16 +170,22 @@ export async function Prompt(message) {
     return new Promise((resolve) => {
         const handleEnter = (e) => {
             if (e.key === "Enter") {
+                e.preventDefault();
+                
                 const val = input.value.trim();
                 input.value = "";
                 input_sign.innerHTML = oldSign;
+                
                 window.removeEventListener("keydown", handleEnter);
                 resolve(val);
             }
         };
-        window.addEventListener("keydown", handleEnter);
+        setTimeout(() => {
+            window.addEventListener("keydown", handleEnter);
+        }, 50);
     });
 }
+
 export async function Choose(options, display, menu_name) {
     let curIndex = 0;
     choosing = true;
@@ -228,6 +229,7 @@ export const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 export function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
 let homeInterval = null;
 export function home() {
     input.disabled = true;
@@ -235,29 +237,26 @@ export function home() {
 
     function drawUI(){
         let clock = new Date();
-
         if(homeInterval) clearInterval(homeInterval);
-
         output.innerHTML = `<pre style="font-size: 20px; line-height: 20px;">
-               úúúúúúúúú        úúúúúúúúúúú                                                                     
-            ôúúúúúúúúúúôú     ôô&úúúúúúúúúúôô                                                                   
-            úúúúúú   úúúúú    úúúúú     üúúúú                                                                   
-            úúúúúú   úúúúú    úúúúú   úúúúúúú                                                                   
-            úúúúúú   úúúúú    úúúúú   úúúúúúú                                                                   
-               úúúúúúúúú      úúúúú úúúúúúúúú                                                                   
-            úúúúúú   úúúúú    úúúúúúúúú üúúúú        úúúúúúúúúúúú   úúúúú    úúúú&     üúúúúúúúúúúú             
-            úúúúúú   úúúúú    úúúúúúúúú üúúúú        úúúúúúúúúúúú   úúúúú    úúúú&     üúúúúúúúúúúú             
-            úúúúúú   úúúúú    úúúúúúú   üúúúúúúúúúúúúúúú            úúúúú    úúúú&   &úúúúü                     
-            üúúúúúúúúúúúú&    úúúúúúúúúúúúúú&&&&&&&úúúúúúúúúúú      úúúúú    úúúú&   ú&úúúúúúúúú&               
-               úúúúúúúúú        úúúúúúúúúúú          úúúúúúúúú      úúúúú    úúúú&     üúúúúúúúúú               
-                                                            úúúúúú     úúúúúúúúúúú&            &úúúú             
-                                                    úúúúúúúúúúúúúõ     úúúúúúúúúúú&   úúúúúúúúúúúúúú             
-                                                    úúúúúúúúúúú               úúúú&   &úúúúúúúúúúú               
-                                                                    úúúúúúúúúúúú                                
-                                                                    úúúúúúúúúúúú      
-        </pre>`;
-
-        Print("80-sys     [Version 1.87231]");
+                úúúúúúúúú        úúúúúúúúúúú                                                 
+             ôúúúúúúúúúúôú     ôô&úúúúúúúúúúôô                                               
+             úúúúúú   úúúúú    úúúúú     üúúúú                                               
+             úúúúúú   úúúúú    úúúúú   úúúúúúú                                               
+             úúúúúú   úúúúú    úúúúú   úúúúúúú                                               
+                úúúúúúúúú      úúúúú úúúúúúúúú                                               
+             úúúúúú   úúúúú    úúúúúúúúú üúúúú        úúúúúúúúúúúú   úúúúú    úúúú&     üúúúúúúúúúúú            
+             úúúúúú   úúúúú    úúúúúúúúú üúúúú        úúúúúúúúúúúú   úúúúú    úúúú&     üúúúúúúúúúúú            
+             úúúúúú   úúúúú    úúúúúúú   üúúúúúúúúúúúúúúú            úúúúú    úúúú&   &úúúúü                    
+             üúúúúúúúúúúúú&    úúúúúúúúúúúúúú&&&&&&&úúúúúúúúúúú      úúúúú    úúúú&   ú&úúúúúúúúú&              
+                úúúúúúúúú        úúúúúúúúúúú          úúúúúúúúú      úúúúú    úúúú&     üúúúúúúúúú              
+                                                              úúúúúú     úúúúúúúúúúú&            &úúúú            
+                                                     úúúúúúúúúúúúúõ     úúúúúúúúúúú&   úúúúúúúúúúúúúú            
+                                                     úúúúúúúúúúú               úúúú&   &úúúúúúúúúúú              
+                                                                     úúúúúúúúúúúú                                
+                                                                     úúúúúúúúúúúúúú                             
+</pre>`;
+Print("80-sys     [Version 1.87231]");
         Print("(z) Y-K Duo-production. No rules here.");
         Print("[OK] Auth: " + (sessionStorage.getItem("currentUser") || "GUEST"));
         Print("[OK] Date: " + clock.toLocaleDateString() + " " + clock.toLocaleTimeString());
@@ -278,7 +277,6 @@ export function home() {
             input.focus();
             Print("Terminal Ready.");
         };
-
 
     drawUI();
     document.addEventListener("keydown", exitHome);

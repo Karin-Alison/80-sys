@@ -1,24 +1,55 @@
-import {startSnakeGenocide} from "./Snake.js";
-import {home} from "./Stuff.js";
-import {startTicTacToe} from "./TicTacToe.js";
+import { home, Print } from "./Stuff.js";
+import { startTicTacToe } from "./TicTacToe.js";
+import { startSnakeGenocide } from "./Snake.js";
+import { login, register, whoami } from "./Auth.js";
 
 export const commands = {
     "hello": () => "Heyy",
     
     "home": () => {
         home();
-        return "";
+        return ""; 
     },
 
-    "time": () => "Current Time: " + new Date().toLocaleTimeString(),
+    "time": () => `SYSTEM TIME: ${new Date().toLocaleTimeString()}`,
 
     "clear": () => {
         document.getElementById("output").innerHTML = "";
         return "";
     },
-    
-    "frog": () => "|||FROGGGG SECRET|||",
-    
+
+    "help": () => {
+        return `
+AVAILABLE COMMANDS:
+-------------------
+HOME     - System Information
+CLEAR    - Clear Terminal
+LOGIN    - Access User Account
+REGISTER - Create New Account
+WHOAMI   - Check Session Status
+LOGOUT   - Terminate Session
+TTT      - Play Tic-Tac-Toe
+SNAKE    - Play Snake
+TIME     - Display Clock
+        `;
+    },
+    "login": async () => {
+        return await login();
+    },
+
+    "register": async () => {
+        return await register();
+    },
+
+    "whoami": () => {
+        return whoami();
+    },
+
+    "logout": () => {
+        sessionStorage.removeItem("currentUser");
+        return "User logged out. Session terminated.";
+    },
+
     "snake": () => {
         startSnakeGenocide();
         return "Initializing Snake Protocol...";
@@ -28,31 +59,5 @@ export const commands = {
         return await startTicTacToe();
     },
 
-    "login": () => {
-        if (window.showLoginPanel) {
-            window.showLoginPanel(); 
-            return "Opening secure login interface...";
-        } else {
-            return "SYSTEM ERROR: Login utility not found.";
-        }
-    },
-
-    "register": () => {
-        if (window.showLoginPanel) {
-            window.showLoginPanel();
-            return "Opening registration interface...";
-        } else {
-            return "SYSTEM ERROR: Registration utility not found.";
-        }
-    },
-
-    "whoami": () => {
-        const user = sessionStorage.getItem("currentUser");
-        return user ? `Logged in as: ${user}` : "Status: GUEST SESSION";
-    },
-
-    "logout": () => {
-        sessionStorage.removeItem("currentUser");
-        return "User logged out. Session terminated.";
-    }
+    "frog": () => "||| FROGGGG SECRET DETECTED |||"
 };
