@@ -51,11 +51,9 @@ input.addEventListener("keyup", async (ev) => {
     }
     
 })*/
-import { output, input, choosing, Print, home, sleep, input_sign } from "./Scripts/Stuff.js";
+import { output, input, choosing, Print, home, sleep, input_sign, getEnabled, setEnabled} from "./Scripts/Stuff.js";
 import { commands } from "./Scripts/commands.js";
-
 let enterPressed = false;
-
 const focusInput = () => {
     const loginPanel = document.getElementById("login-panel");
     const isLoginOpen = loginPanel && loginPanel.style.display === "block";
@@ -75,7 +73,7 @@ document.addEventListener('keydown', focusInput);
 window.onload = focusInput;
 
 input.addEventListener("keyup", async (ev) => {
-    if (ev.key !== "Enter" || enterPressed) return;
+    if (ev.key !== "Enter" || enterPressed || !getEnabled()) return;
 
     const cmd = input.value.trim().toLowerCase();
     enterPressed = true;

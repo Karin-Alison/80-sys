@@ -15,12 +15,16 @@ export const commands = {
         document.getElementById("output").innerHTML = "";
         return "";
     },
-
+    
     "frog": () => "|||FROGGGG SECRET|||",
-
+    
     "snake": () => {
         startSnakeGenocide();
         return "Initializing Snake Protocol...";
+    },
+
+    "ttt": async () => {
+        return await startTicTacToe();
     },
 
     "login": () => {
