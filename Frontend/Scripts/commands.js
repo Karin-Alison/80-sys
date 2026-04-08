@@ -1,5 +1,6 @@
-import { startSnakeGenocide } from "./Snake.js";
-import { home } from "./Stuff.js";
+import {startSnakeGenocide} from "./Snake.js";
+import {home} from "./Stuff.js";
+import {startTicTacToe} from "./TicTacToe.js";
 
 export const commands = {
     "hello": () => "Heyy",
