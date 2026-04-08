@@ -1,6 +1,5 @@
-import {startSnakeGenocide} from "./Snake.js";
-import {home} from "./Stuff.js";
-import {startTicTacToe} from "./TicTacToe.js"; 
+import { startSnakeGenocide } from "./Snake.js";
+import { home } from "./Stuff.js";
 
 export const commands = {
     "hello": () => "Heyy",
@@ -55,4 +54,4 @@ export const commands = {
         sessionStorage.removeItem("currentUser");
         return "User logged out. Session terminated.";
     }
-}; 
+};

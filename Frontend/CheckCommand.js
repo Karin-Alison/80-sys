@@ -1,4 +1,5 @@
 /*import { output, input, choosing, Print, home, sleep, input_sign } from "./Scripts/Stuff.js";
+>>>>>>> a40485a731eeb5928c29c7c6d397b6a827c36189
 import { commands } from "./Scripts/commands.js";
 
 let enterPressed = false;
@@ -28,7 +29,6 @@ window.onload = () => {
 
 //command handler thingy
 input.addEventListener("keyup", async (ev) => {
-
     const cmd = input.value.trim().toLowerCase();
     if(ev.key === "Enter" && !enterPressed){
         enterPressed = true;
@@ -51,11 +51,9 @@ input.addEventListener("keyup", async (ev) => {
     }
     
 })*/
-import { output, input, choosing, Print, home, sleep, input_sign } from "./Scripts/Stuff.js";
+import { output, input, choosing, Print, home, sleep, input_sign, getEnabled, setEnabled} from "./Scripts/Stuff.js";
 import { commands } from "./Scripts/commands.js";
-
 let enterPressed = false;
-
 const focusInput = () => {
     const loginPanel = document.getElementById("login-panel");
     const isLoginOpen = loginPanel && loginPanel.style.display === "block";
@@ -75,7 +73,7 @@ document.addEventListener('keydown', focusInput);
 window.onload = focusInput;
 
 input.addEventListener("keyup", async (ev) => {
-    if (ev.key !== "Enter" || enterPressed) return;
+    if (ev.key !== "Enter" || enterPressed || !getEnabled()) return;
 
     const cmd = input.value.trim().toLowerCase();
     enterPressed = true;

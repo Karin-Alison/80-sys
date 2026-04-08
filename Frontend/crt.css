@@ -51,7 +51,7 @@ body {
 
 .crt-content {
   position: relative;
-  z-index: 3;
+  z-index: 3; 
   padding: 20px 40px;
 }
 
@@ -139,7 +139,8 @@ body {
   text-shadow:
     0 0 2px #00ff88,
     0 0 6px #00ff88,
-    0 0 12px rgba(0, 255, 136, 0.5);
+    0 0 12px #00ff88,
+    0 0 20px rgba(0,255,136,0.8);
   animation: flicker 0.15s infinite;
 }
 
@@ -177,7 +178,8 @@ input {
 }
 
 .menu-blink {
-  color: #fff;
+  color: #003322;
+  background-color: #00ff88;
   text-shadow: 0 0 8px #fff;
   animation: menuSelect 0.5s step-end infinite;
 }
@@ -201,11 +203,15 @@ input {
 }
 
 @keyframes flicker {
-  0%   { opacity: 0.94; }
-  5%   { opacity: 0.98; }
-  10%  { opacity: 0.92; }
+  0%   { opacity: 0.85; }
+  5%   { opacity: 0.95; }
+  10%  { opacity: 0.9; }
   15%  { opacity: 1; }
-  25%  { opacity: 0.96; }
+  20%  { opacity: 0.92; }
+  25%  { opacity: 1; }
+  30%  { opacity: 0.88; }
+  35%  { opacity: 0.97; }
+  40%  { opacity: 0.9; }
   100% { opacity: 0.95; }
 }
 
@@ -286,4 +292,15 @@ input {
     z-index: 999;
     display: none; 
     backdrop-filter: blur(2px); 
+}
+
+
+#hangman-lost{
+    background-color: #ff3333;
+    box-shadow: 0 0 15px #ff3333;
+    color: #fff;
+    text-shadow:
+      0 0 2px #fff,
+      0 0 6px #fff,
+      0 0 12px #fff,
 }
