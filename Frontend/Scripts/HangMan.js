@@ -108,8 +108,7 @@ let animationLoseP = [`<pre id="hangman-lost">`+hangManPics[9]+ "</pre>", `<pre>
         let animationCount = 0;
         let win = false;
         let lives_used = 0;
-        // let word = words[Math.floor(Math.random()*words.length)];
-        let word = "apple";
+        let word = words[Math.floor(Math.random()*words.length)];
         let correct_letters = [];
         let letters_guessed = [];
         setEnabled(false);
