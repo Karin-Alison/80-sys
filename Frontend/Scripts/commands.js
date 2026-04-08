@@ -1,5 +1,6 @@
-import { startSnakeGenocide } from "./Snake.js";
-import { home } from "./Stuff.js";
+import {startSnakeGenocide} from "./Snake.js";
+import {home} from "./Stuff.js";
+import {startTicTacToe} from "./TicTacToe.js"; 
 
 export const commands = {
     "hello": () => "Heyy",
@@ -15,12 +16,16 @@ export const commands = {
         document.getElementById("output").innerHTML = "";
         return "";
     },
-
+    
     "frog": () => "|||FROGGGG SECRET|||",
-
+    
     "snake": () => {
         startSnakeGenocide();
         return "Initializing Snake Protocol...";
+    },
+
+    "ttt": async () => {
+        return await startTicTacToe();
     },
 
     "login": () => {
@@ -50,4 +55,4 @@ export const commands = {
         sessionStorage.removeItem("currentUser");
         return "User logged out. Session terminated.";
     }
-};
+}; 
