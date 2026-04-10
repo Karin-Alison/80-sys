@@ -55,6 +55,7 @@ export async function startTicTacToe() {
     }
 
     await sleep(2000);
+    input.focus();
     return "Returning to system prompt...";
 }
 

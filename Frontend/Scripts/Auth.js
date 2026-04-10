@@ -1,4 +1,4 @@
-import { Print, Prompt, sleep } from "./Stuff.js";
+import { Print, Prompt, sleep, getChoosing, setChoosing } from "./Stuff.js";
 
 export async function register() {
     const users = JSON.parse(localStorage.getItem("users") || "{}");
@@ -6,13 +6,13 @@ export async function register() {
     const username = await Prompt("ENTER NEW USERNAME:");
     if (!username) {
         const stuff = await import("./Stuff.js");
-        stuff.choosing = false;
+        window.choosing = false;
         return "Registration cancelled.";
     }
     
     if (users[username]) {
         const stuff = await import("./Stuff.js");
-        stuff.choosing = false;
+        window.choosing = false;
         return `ERROR: User '${username}' already exists.`;
     }
 
@@ -21,7 +21,7 @@ export async function register() {
     // Process registration
     if (password.length < 3) {
         const stuff = await import("./Stuff.js");
-        stuff.choosing = false;
+        window.choosing = false;
         return "ERROR: Password must be at least 3 characters.";
     }
 
@@ -35,7 +35,7 @@ export async function register() {
     
     // Unlock terminal
     const stuff = await import("./Stuff.js");
-    stuff.choosing = false;
+    window.choosing = false;
 
     await sleep(500);
     return `SUCCESS: User '${username}' registered. Type 'login' to enter.`;
@@ -47,20 +47,20 @@ export async function login() {
     const username = await Prompt("USERNAME:");
     if (!username) {
         const stuff = await import("./Stuff.js");
-        stuff.choosing = false;
+        window.choosing = false;
         return "Login aborted.";
     }
     
     if (!users[username]) {
         const stuff = await import("./Stuff.js");
-        stuff.choosing = false;
+        window.choosing = false;
         return "ERROR: User not found. Type 'register' to create an account.";
     }
 
     const password = await Prompt("PASSWORD:");
 
     const stuff = await import("./Stuff.js");
-    stuff.choosing = false;
+    window.choosing = false;
 
     if (users[username].password === password){
         sessionStorage.setItem("currentUser", username);

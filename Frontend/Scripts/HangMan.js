@@ -1,4 +1,4 @@
-import { input, output, getRandomInt, Print, input_sign, getEnabled, setEnabled} from "./Stuff.js"; 
+import { input, output, getRandomInt, Print, input_sign, getEnabled, setEnabled, setChoosing} from "./Stuff.js"; 
 
 
 export async function HangMan(){
@@ -111,7 +111,7 @@ let animationLoseP = [`<pre id="hangman-lost">`+hangManPics[9]+ "</pre>", `<pre>
         let word = words[Math.floor(Math.random()*words.length)];
         let correct_letters = [];
         let letters_guessed = [];
-        setEnabled(false);
+        window.choosing = true;
         let enterPressed = false;
 
         function getDisplayWord(){
@@ -183,12 +183,14 @@ let animationLoseP = [`<pre id="hangman-lost">`+hangManPics[9]+ "</pre>", `<pre>
                     if (cmd == "again") {
                         Print("Game Starting again...");
                         input.removeEventListener("keyup", againListener);
+                        input.removeEventListener("keyup", listener);
                         HangMan();
                     }
                     else if(cmd == "quit"){
                         input.removeEventListener("keyup", againListener);
+                        window.choosing = false;
                         Print("Game Closed.");
-                        setEnabled(true);
+                        input.focus();
                     }
                     else{
                         Print(`Try again, command ${cmd} is unknown.`);

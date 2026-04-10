@@ -147,6 +147,17 @@ export function getEnabled(){
     return enabled;
 }
 
+
+
+export function setChoosing(value){
+    choosing = value;
+}
+
+export function getChoosing(){
+    return choosing;
+}
+
+
 export function Print(message, display = output, rewrite = false) {
     if (rewrite) {
         display.innerHTML = `<div>${message}</div>`;
@@ -161,28 +172,33 @@ export function Print(message, display = output, rewrite = false) {
 }
 
 export async function Prompt(message) {
-    window.choosing = true; // Global lock
+    window.choosing = true;
+
     Print(message);
+
     const oldSign = input_sign.innerHTML;
     input.value = "";
-    input_sign.innerHTML = "> "; 
-    
+    input_sign.innerHTML = "> ";
+
     return new Promise((resolve) => {
+
         const handleEnter = (e) => {
-            if (e.key === "Enter") {
-                e.preventDefault();
-                
-                const val = input.value.trim();
-                input.value = "";
-                input_sign.innerHTML = oldSign;
-                
-                window.removeEventListener("keydown", handleEnter);
-                resolve(val);
-            }
+            if (e.key !== "Enter") return;
+
+            e.preventDefault();
+
+            window.removeEventListener("keydown", handleEnter);
+
+            const val = input.value.trim();
+            input.value = "";
+            input_sign.innerHTML = oldSign;
+
+            window.choosing = false;
+
+            resolve(val);
         };
-        setTimeout(() => {
-            window.addEventListener("keydown", handleEnter);
-        }, 50);
+
+        window.addEventListener("keydown", handleEnter);
     });
 }
 
@@ -237,7 +253,6 @@ export function home() {
 
     function drawUI(){
         let clock = new Date();
-        if(homeInterval) clearInterval(homeInterval);
         output.innerHTML = `<pre style="font-size: 20px; line-height: 20px;">
                 úúúúúúúúú        úúúúúúúúúúú                                                 
              ôúúúúúúúúúúôú     ôô&úúúúúúúúúúôô                                               
@@ -269,7 +284,8 @@ Print("80-sys     [Version 1.87231]");
         Print("PRESS ANY KEY TO EXIT TO TERMINAL");
     }
 
-    function exitHome(){
+    function exitHome(event){
+            if (event.key == "Enter") return;
             clearInterval(homeInterval);
             document.removeEventListener("keydown", exitHome);
             input.disabled = false;
@@ -279,6 +295,7 @@ Print("80-sys     [Version 1.87231]");
         };
 
     drawUI();
-    document.addEventListener("keydown", exitHome);
     homeInterval = setInterval(drawUI, 1000);
+    document.addEventListener("keydown", exitHome);
+    
 }

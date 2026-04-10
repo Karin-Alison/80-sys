@@ -2,6 +2,7 @@ import { home, Print } from "./Stuff.js";
 import { startTicTacToe } from "./TicTacToe.js";
 import { startSnakeGenocide } from "./Snake.js";
 import { login, register, whoami } from "./Auth.js";
+import { HangMan } from "./HangMan.js";
 
 export const commands = {
     "hello": () => "Heyy",
@@ -59,5 +60,9 @@ TIME     - Display Clock
         return await startTicTacToe();
     },
 
-    "frog": () => "||| FROGGGG SECRET DETECTED |||"
+    "frog": () => "||| FROGGGG SECRET DETECTED |||",
+
+    "hangman": () => {
+        HangMan();
+    }
 };
