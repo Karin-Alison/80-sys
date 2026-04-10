@@ -1,4 +1,4 @@
-import { home, Print } from "./Stuff.js";
+import { home} from "./Stuff.js";
 import { startTicTacToe } from "./TicTacToe.js";
 import { startSnakeGenocide } from "./Snake.js";
 import { login, register, whoami } from "./Auth.js";
@@ -21,17 +21,18 @@ export const commands = {
 
     "help": () => {
         return `
-AVAILABLE COMMANDS:
--------------------
-HOME     - System Information
-CLEAR    - Clear Terminal
-LOGIN    - Access User Account
-REGISTER - Create New Account
-WHOAMI   - Check Session Status
-LOGOUT   - Terminate Session
-TTT      - Play Tic-Tac-Toe
-SNAKE    - Play Snake
-TIME     - Display Clock
+AVAILABLE COMMANDS: <br>
+------------------- <br>
+HOME     - System Information <br>
+CLEAR    - Clear Terminal <br>
+LOGIN    - Access User Account <br>
+REGISTER - Create New Account <br>
+WHOAMI   - Check Session Status <br>
+LOGOUT   - Terminate Session <br>
+TTT      - Play Tic-Tac-Toe <br>
+SNAKE    - Play Snake <br>
+TIME     - Display Clock <br>
+HANGMAN  - Play Hangman
         `;
     },
     "login": async () => {

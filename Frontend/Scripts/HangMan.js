@@ -1,4 +1,4 @@
-import { input, output, getRandomInt, Print, input_sign, getEnabled, setEnabled, setChoosing} from "./Stuff.js"; 
+import { input, output, Print, input_sign} from "./Stuff.js"; 
 
 
 export async function HangMan(){
@@ -204,7 +204,7 @@ let animationLoseP = [`<pre id="hangman-lost">`+hangManPics[9]+ "</pre>", `<pre>
 
                 input.addEventListener("keyup", againListener);
 
-            }, maxFrames * 300);
+            }, maxFrames * 400);
         }
 
 

@@ -1,27 +1,24 @@
-import { Print, Prompt, sleep, getChoosing, setChoosing } from "./Stuff.js";
+import { Prompt, sleep, setChoosing } from "./Stuff.js";
 
 export async function register() {
     const users = JSON.parse(localStorage.getItem("users") || "{}");
     
     const username = await Prompt("ENTER NEW USERNAME:");
+    
     if (!username) {
-        const stuff = await import("./Stuff.js");
-        window.choosing = false;
+        setChoosing(false);
         return "Registration cancelled.";
     }
     
     if (users[username]) {
-        const stuff = await import("./Stuff.js");
-        window.choosing = false;
-        return `ERROR: User '${username}' already exists.`;
+        setChoosing(false);
+        return `ERROR: User '${username}' already exists.`; 
     }
 
     const password = await Prompt("ENTER NEW PASSWORD:");
     
-    // Process registration
-    if (password.length < 3) {
-        const stuff = await import("./Stuff.js");
-        window.choosing = false;
+    if (!password || password.length < 3) {
+        setChoosing(false);
         return "ERROR: Password must be at least 3 characters.";
     }
 
@@ -32,10 +29,7 @@ export async function register() {
     };
     
     localStorage.setItem("users", JSON.stringify(users));
-    
-    // Unlock terminal
-    const stuff = await import("./Stuff.js");
-    window.choosing = false;
+    setChoosing(false);
 
     await sleep(500);
     return `SUCCESS: User '${username}' registered. Type 'login' to enter.`;
@@ -46,21 +40,18 @@ export async function login() {
     
     const username = await Prompt("USERNAME:");
     if (!username) {
-        const stuff = await import("./Stuff.js");
-        window.choosing = false;
+        setChoosing(false);
         return "Login aborted.";
     }
     
     if (!users[username]) {
-        const stuff = await import("./Stuff.js");
-        window.choosing = false;
+        setChoosing(false);
         return "ERROR: User not found. Type 'register' to create an account.";
     }
 
     const password = await Prompt("PASSWORD:");
 
-    const stuff = await import("./Stuff.js");
-    window.choosing = false;
+    setChoosing(false);
 
     if (users[username].password === password){
         sessionStorage.setItem("currentUser", username);

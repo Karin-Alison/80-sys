@@ -88,21 +88,15 @@ function LonelySnake(){
     }
 
     function update(){
-        // Print("Updating");
-        // Print("StartUpdateIsRunning:" + isRunning);
         if(!isRunning) return;
         let head = Zmiq[0];
 
         for(let num = 1; num < Zmiq.length; num++){
-            // Print("Num: " + num);
-            // Print("Zmiq[num]: " + Zmiq[num]);
-            // Print("head: " + head);
             if(Zmiq[num][0] === head[0] && Zmiq[num][1] === head[1]){
                 isRunning = false;
                 return;
             }
         }
-        // Print("AfterCheckIsRunning:" + isRunning);
 
         let newHead = [
             head[0] + direction[0],
@@ -187,11 +181,15 @@ function LonelySnake(){
         gameDraw();
         changed = false;
         if(!isRunning){
+            input.focus();
+
             clearInterval(intervalId);
             if(!GameOver) GameOver = setInterval(gameOver, 500);
             if(Bye){
                 clearInterval(GameOver);
                 removeEventListener("keydown", eventListener);
+                input.focus();
+
             }
         }
     }

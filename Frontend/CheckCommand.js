@@ -1,24 +1,18 @@
-
-import { output, input, setChoosing, getChoosing, Print, home, sleep, input_sign, getEnabled, setEnabled} from "./Scripts/Stuff.js";
+import { output, input, setChoosing, getChoosing, Print, home, sleep, input_sign, getEnabled, setEnabled } from "./Scripts/Stuff.js";
 import { commands } from "./Scripts/commands.js";
+
 let enterPressed = false;
+
 const focusInput = () => {
-    const loginPanel = document.getElementById("login-panel");
-    const isLoginOpen = loginPanel && loginPanel.style.display === "block";
-
-    if (!getChoosing() && !input.disabled && !isLoginOpen) {
+    setTimeout(() => {
         input.focus();
-    }
-
-    window.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: 'instant'
-    });
+    }, 0);
 };
 
-document.addEventListener('click', focusInput);
+document.addEventListener('mousedown', focusInput);
 document.addEventListener('keydown', focusInput);
 window.onload = focusInput;
+
 input.addEventListener("keyup", async (ev) => {
     if (ev.key !== "Enter" || enterPressed || !getEnabled()) return;
 
@@ -79,7 +73,7 @@ window.closePanel = function() {
     document.getElementById("overlay-dim").style.display = "none";
     
     input.readOnly = false;
-    input.focus();
+    focusInput();
 };
 
 window.executeLogin = function() {
@@ -99,5 +93,3 @@ window.executeLogin = function() {
         alert("Enter both username and password.");
     }
 };
-
-
