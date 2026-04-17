@@ -39,7 +39,9 @@ export function Print(message, display = output, rewrite = false) {
 export async function Prompt(message) {
     window.choosing = true;
     Print(message);
-
+    input.disabled = false;
+    input.readOnly = false;
+    input.focus();
     const oldSign = input_sign.innerHTML;
     input.value = "";
     input_sign.innerHTML = "> ";

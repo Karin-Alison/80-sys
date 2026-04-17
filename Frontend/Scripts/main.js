@@ -62,7 +62,7 @@
 
 // Nqkwo mahnah takowa nz mahnah checkcommand shtom imame main i da, ama tam mn neshta imashe koito tuk nqma taka che da
 import { output, input, setChoosing, getChoosing, Print, home, sleep, input_sign, getEnabled, setEnabled } from "./Stuff.js";
-import { commands } from "./Scripts/commands.js";
+import { commands } from "./commands.js";
 
 let enterPressed = false;
 
@@ -76,15 +76,15 @@ const focusInput = () => {
     }, 0);
 };
 
-document.addEventListener('mousedown', (e) => {
-    if (e.target.tagName !== "INPUT") focusInput();
-});
+// document.addEventListener('mousedown', (e) => {
+//     if (e.target.tagName !== "INPUT") focusInput();
+// });
 
-document.addEventListener('keydown', (e) => {
-    if (e.target.tagName !== "INPUT") {
-        focusInput();
-    }
-});
+// document.addEventListener('keydown', (e) => {
+//     if (e.target.tagName !== "INPUT") {
+//         focusInput();
+//     }
+// });
 window.onload = focusInput;
 
 input.addEventListener("keydown", (ev) => {
@@ -94,13 +94,13 @@ input.addEventListener("keydown", (ev) => {
 });
 
 input.addEventListener("keyup", async (ev) => {
-    if (enterPressed || !getEnabled()) return;
+    if (enterPressed || !getEnabled() || window.choosing) return;
 
     if (ev.key === "Enter") {
-        const cmd = input.value.trim().toLowerCase();
+        const cmd = input.value.trim().toLowerCase().split(" ");
         
-        if (cmd !== "" && cmd !== commandHistory[commandHistory.length - 1]) {
-            commandHistory.push(cmd);
+        if (cmd.toString !== "" && cmd.toString() !== commandHistory[commandHistory.length - 1]) {
+            commandHistory.push(cmd.toString());
         }
 
         enterPressed = true;
@@ -112,22 +112,22 @@ input.addEventListener("keyup", async (ev) => {
         input.readOnly = true;
         input.value = "";
 
-        if (cmd !== "") {
-            output.innerHTML += `<div><span class="user-prefix">${currentSign}</span> ${cmd}</div>`;
+        if (cmd.toString() !== "") {
+            output.innerHTML += `<div><span class="user-prefix">${currentSign}</span> ${cmd.join(" ")}</div>`;
         }
 
-        if (commands[cmd]) {
+        if (commands[cmd[0]]) {
             await sleep(100 + Math.random() * 300);
             
             try {
-                const result = await commands[cmd]();
+                const result = await commands[cmd[0]](cmd.slice(1).join(" "));
                 if (result) {
                     Print(result);
                 }
             } catch (error) {
                 Print(`SYSTEM ERROR: ${error.message}`);
             }
-        } else if (cmd !== "") {
+        } else if (cmd[0] !== "") {
             Print(`Command '${cmd}' not found. Type 'help' for options.`);
         }
 

@@ -3,6 +3,7 @@ import { startTicTacToe } from "./TicTacToe.js";
 import { startSnakeGenocide } from "./Snake.js";
 import { login, register, whoami } from "./Auth.js";
 import { HangMan } from "./HangMan.js";
+import { ls, cd } from "./FileSystem.js";
 
 export const commands = {
     "hello": () => "Heyy",
@@ -65,5 +66,11 @@ HANGMAN  - Play Hangman
 
     "hangman": () => {
         HangMan();
+    },
+    "ls": () => {
+        ls();
+    },
+    "cd": (parameters) => {
+        cd(parameters);
     }
 };
